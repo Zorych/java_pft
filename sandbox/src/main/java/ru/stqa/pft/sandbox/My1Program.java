@@ -1,6 +1,6 @@
 package ru.stqa.pft.sandbox;
 
-public class My1stProgram {
+public class My1Program {
   public static void main(String[] args) {
     hello("world");
     hello("user");
