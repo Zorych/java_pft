@@ -9,8 +9,8 @@ public class Point {
     this.y = y;
   }
 
-  public void distance(Point p2) {
-    double d = Math.sqrt(Math.pow((this.x - p2.x), 2) + Math.pow((this.y - p2.y), 2));
-    System.out.println("Расстояние между точками с координатами [" + this.x + ";" + this.y + "] и [" + p2.x + ";" + p2.y + "] = " + d);
+  public double distance(Point p2) {
+    return Math.sqrt(Math.pow((this.x - p2.x), 2) + Math.pow((this.y - p2.y), 2));
+//    System.out.println("Расстояние между точками с координатами [" + this.x + ";" + this.y + "] и [" + p2.x + ";" + p2.y + "] = " + d);
   }
 }

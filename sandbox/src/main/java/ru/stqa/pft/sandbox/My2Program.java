@@ -7,10 +7,10 @@ public class My2Program {
     Point p3 = new Point(0, 0);
     Point p4 = new Point(-1.5, 2.5);
 
-    p1.distance(p2);
-    p1.distance(p3);
-    p1.distance(p4);
-    p4.distance(p2);
-    p2.distance(p3);
+    System.out.println("Расстояние между точками с координатами [" + p1.x + ";" + p1.y + "] и [" + p2.x + ";" + p2.y + "] = " + p1.distance(p2));
+    System.out.println("Расстояние между точками с координатами [" + p1.x + ";" + p1.y + "] и [" + p3.x + ";" + p3.y + "] = " + p1.distance(p3));
+    System.out.println("Расстояние между точками с координатами [" + p1.x + ";" + p1.y + "] и [" + p4.x + ";" + p4.y + "] = " + p1.distance(p4));
+    System.out.println("Расстояние между точками с координатами [" + p4.x + ";" + p4.y + "] и [" + p2.x + ";" + p2.y + "] = " + p4.distance(p2));
+    System.out.println("Расстояние между точками с координатами [" + p2.x + ";" + p2.y + "] и [" + p3.x + ";" + p3.y + "] = " + p2.distance(p3));
   }
 }
