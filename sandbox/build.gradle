@@ -3,4 +3,16 @@ apply plugin: 'application'
 //compileJava.options.encoding = 'UTF-8'
 //compileTestJava.options.encoding = 'UTF-8'
 //javadoc.options.encoding = 'UTF-8'
-mainClassName = "My1Program"
+mainClassName = "ru.stqa.pft.sandbox.My1Program"
+
+test {
+    useTestNG()
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.testng:testng:7.0.0'
+}
