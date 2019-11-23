@@ -1,18 +1,19 @@
 package ru.stqa.pft.addressbook;
 
 import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class ContactCreationTest {
+public class ContactCreationTests {
   private WebDriver wd;
 
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
-    System.setProperty("webdriver.gecko.driver", "C:\\dev\\webdrivers\\geckodriver.exe");
-    wd = new FirefoxDriver();
+    wd = new ChromeDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/");
     login("admin", "secret");
