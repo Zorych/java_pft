@@ -19,12 +19,14 @@ public class ContactData {
   private final String bMonth;
   private final String bDay;
   private final String bYear;
-  private final String group;
+  private final String aMonth;
+  private final String aDay;
+  private final String aYear;
   private final String secAddress;
   private final String secPhone;
   private final String secNotes;
 
-  public ContactData(String firstName, String middleName, String lastName, String nickName, String title, String company, String address, String homePhone, String mobilePhone, String workPhone, String faxPhone, String email, String email2, String email3, String homepage, String bMonth, String bDay, String bYear, String group, String secAddress, String secPhone, String secNotes) {
+  public ContactData(String firstName, String middleName, String lastName, String nickName, String title, String company, String address, String homePhone, String mobilePhone, String workPhone, String faxPhone, String email, String email2, String email3, String homepage, String bMonth, String bDay, String bYear, String aMonth, String aDay, String aYear, String secAddress, String secPhone, String secNotes) {
     this.firstName = firstName;
     this.middleName = middleName;
     this.lastName = lastName;
@@ -43,7 +45,9 @@ public class ContactData {
     this.bMonth = bMonth;
     this.bDay = bDay;
     this.bYear = bYear;
-    this.group = group;
+    this.aMonth = aMonth;
+    this.aDay = aDay;
+    this.aYear = aYear;
     this.secAddress = secAddress;
     this.secPhone = secPhone;
     this.secNotes = secNotes;
@@ -121,8 +125,16 @@ public class ContactData {
     return bYear;
   }
 
-  public String getGroup() {
-    return group;
+  public String getAMonth() {
+    return aMonth;
+  }
+
+  public String getADay() {
+    return aDay;
+  }
+
+  public String getAYear() {
+    return aYear;
   }
 
   public String getSecAddress() {

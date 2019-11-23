@@ -33,9 +33,31 @@ public class ContactHelper extends BaseHelper {
     fillDropList(By.name("bday"), contactData.getbDay());
     fillDropList(By.name("bmonth"), contactData.getbMonth());
     type(By.name("byear"), contactData.getbYear());
-    fillDropList(By.name("new_group"), contactData.getGroup());
+    fillDropList(By.name("aday"), contactData.getADay());
+    fillDropList(By.name("amonth"), contactData.getAMonth());
+    type(By.name("ayear"), contactData.getAYear());
     type(By.name("address2"), contactData.getSecAddress());
     type(By.name("phone2"), contactData.getSecPhone());
     type(By.name("notes"), contactData.getSecNotes());
+  }
+
+  public void deleteAllContacts() {
+    click(By.id("MassCB"));
+    click(By.xpath("//input[@value='Delete']"));
+    wd.switchTo().alert().accept();
+  }
+
+  public void deleteSelectedContacts() {
+    click(By.name("selected[]"));
+    click(By.xpath("//input[@value='Delete']"));
+    wd.switchTo().alert().accept();
+  }
+
+  public void initContactModification() {
+    click(By.xpath("//img[@alt='Edit']"));
+  }
+
+  public void submitContactModification() {
+    click(By.name("update"));
   }
 }
