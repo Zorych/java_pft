@@ -1,55 +1,106 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
-  private final String firstName;
-  private final String middleName;
-  private final String lastName;
-  private final String nickName;
-  private final String title;
-  private final String company;
-  private final String address;
-  private final String homePhone;
-  private final String mobilePhone;
-  private final String workPhone;
-  private final String faxPhone;
-  private final String email;
-  private final String email2;
-  private final String email3;
-  private final String homepage;
-  private final String bMonth;
-  private final String bDay;
-  private final String bYear;
-  private final String aMonth;
-  private final String aDay;
-  private final String aYear;
-  private final String secAddress;
-  private final String secPhone;
-  private final String secNotes;
+  private String firstName;
+  private String middleName;
+  private String lastName;
+  private String nickName;
+  private String title;
+  private String company;
+  private String address;
+  private String homePhone;
+  private String mobilePhone;
+  private String workPhone;
+  private String faxPhone;
+  private String email;
+  private String email2;
+  private String email3;
+  private String homepage;
+  private String bMonth;
+  private String bDay;
+  private String bYear;
+  private String aMonth;
+  private String aDay;
+  private String aYear;
+  private String secAddress;
+  private String secPhone;
+  private String secNotes;
 
-  public ContactData(String firstName, String middleName, String lastName, String nickName, String title, String company, String address, String homePhone, String mobilePhone, String workPhone, String faxPhone, String email, String email2, String email3, String homepage, String bMonth, String bDay, String bYear, String aMonth, String aDay, String aYear, String secAddress, String secPhone, String secNotes) {
+  public ContactData(String firstName, String middleName, String lastName) {
     this.firstName = firstName;
     this.middleName = middleName;
     this.lastName = lastName;
+  }
+
+  public void setNickName(String nickName) {
     this.nickName = nickName;
+  }
+
+  public void setTitle(String title) {
     this.title = title;
+  }
+
+  public void setCompany(String company) {
     this.company = company;
+  }
+
+  public void setAddress(String address) {
     this.address = address;
+  }
+
+  public void setHomePhone(String homePhone) {
     this.homePhone = homePhone;
+  }
+
+  public void setMobilePhone(String mobilePhone) {
     this.mobilePhone = mobilePhone;
+  }
+
+  public void setWorkPhone(String workPhone) {
     this.workPhone = workPhone;
+  }
+
+  public void setFaxPhone(String faxPhone) {
     this.faxPhone = faxPhone;
+  }
+
+  public void setEmail(String email) {
     this.email = email;
+  }
+
+  public void setEmail2(String email2) {
     this.email2 = email2;
+  }
+
+  public void setEmail3(String email3) {
     this.email3 = email3;
+  }
+
+  public void setHomepage(String homepage) {
     this.homepage = homepage;
+  }
+
+  public void setBirthday(String bDay, String bMonth, String bYear) {
     this.bMonth = bMonth;
     this.bDay = bDay;
     this.bYear = bYear;
+  }
+
+  public void setAnniversary(String aDay, String aMonth, String aYear) {
     this.aMonth = aMonth;
     this.aDay = aDay;
     this.aYear = aYear;
+  }
+
+  public void setSecAddress(String secAddress) {
     this.secAddress = secAddress;
+  }
+
+  public void setSecPhone(String secPhone) {
     this.secPhone = secPhone;
+  }
+
+  public void setSecNotes(String secNotes) {
     this.secNotes = secNotes;
   }
 
