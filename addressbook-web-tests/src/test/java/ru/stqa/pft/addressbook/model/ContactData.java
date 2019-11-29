@@ -4,6 +4,7 @@ public class ContactData {
   private String firstName;
   private String middleName;
   private String lastName;
+  private String group;
   private String nickName;
   private String title;
   private String company;
@@ -26,10 +27,11 @@ public class ContactData {
   private String secPhone;
   private String secNotes;
 
-  public ContactData(String firstName, String middleName, String lastName) {
+  public ContactData(String firstName, String middleName, String lastName, String group) {
     this.firstName = firstName;
     this.middleName = middleName;
     this.lastName = lastName;
+    this.group = group;
   }
 
   public void setNickName(String nickName) {
@@ -198,5 +200,13 @@ public class ContactData {
 
   public String getSecNotes() {
     return secNotes;
+  }
+
+  public String getGroup() {
+    return group;
+  }
+
+  public void setGroup(String group) {
+    this.group = group;
   }
 }

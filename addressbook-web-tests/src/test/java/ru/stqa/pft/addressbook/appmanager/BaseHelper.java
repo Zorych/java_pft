@@ -17,15 +17,22 @@ public class BaseHelper {
     wd.findElement(locator).click();
   }
 
-  protected void type(By locator, String name) {
+  protected void type(By locator, String text) {
     click(locator);
-    wd.findElement(locator).clear();
-    wd.findElement(locator).sendKeys(name);
+    if (text != null) {
+      String existingText = wd.findElement(locator).getAttribute("value");
+      if (!text.equals(existingText)) {
+        wd.findElement(locator).clear();
+        wd.findElement(locator).sendKeys(text);
+      }
+    }
   }
 
   protected void fillDropList(By locator, String s) {
     click(locator);
-    new Select(wd.findElement(locator)).selectByVisibleText(s);
+    if (s != null) {
+      new Select(wd.findElement(locator)).selectByVisibleText(s);
+    }
   }
 
   public boolean isElementPresent(By by) {
