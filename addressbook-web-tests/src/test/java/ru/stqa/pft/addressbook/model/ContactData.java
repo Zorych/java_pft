@@ -27,10 +27,11 @@ public class ContactData {
   private String secPhone;
   private String secNotes;
 
-  public ContactData(String firstName, String middleName, String lastName, String group) {
+  public ContactData(String firstName, String middleName, String lastName,  String address, String group) {
     this.firstName = firstName;
     this.middleName = middleName;
     this.lastName = lastName;
+    this.address = address;
     this.group = group;
   }
 
@@ -44,10 +45,6 @@ public class ContactData {
 
   public void setCompany(String company) {
     this.company = company;
-  }
-
-  public void setAddress(String address) {
-    this.address = address;
   }
 
   public void setHomePhone(String homePhone) {
