@@ -2,8 +2,12 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends BaseHelper {
 
@@ -60,16 +64,17 @@ public class ContactHelper extends BaseHelper {
     wd.switchTo().alert().accept();
   }
 
-  public void selectContact() {
-    click(By.xpath("//input[@name='selected[]']"));
+  public void selectContact(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
   public void initContactCreation() {
     click(By.xpath("//a[contains(text(),'add new')]"));
   }
 
-  public void initContactModification() {
-    click(By.xpath("//img[@alt='Edit']"));
+  public void initContactModification(int id) {
+    //click(By.xpath("//img[@alt='Edit']"));
+    click(By.xpath("//a[@href='edit.php?id=" + id + "']"));
   }
 
   public void submitContactModification() {
@@ -88,6 +93,20 @@ public class ContactHelper extends BaseHelper {
   }
 
   public boolean isThereAContact() {
-    return isElementPresent(By.name("selected[]"));
+    return !isElementPresent(By.name("selected[]"));
+  }
+
+  public List<ContactData> getContactList() {
+    List<ContactData> contacts = new ArrayList<>();
+    List<WebElement> elements = wd.findElements(By.name("entry"));
+    for(WebElement element : elements) {
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
+      String lastName = element.findElement(By.cssSelector("td:nth-of-type(2)")).getText();
+      String firstName = element.findElement(By.cssSelector("td:nth-of-type(3)")).getText();
+      String address = element.findElement(By.cssSelector("td:nth-of-type(4)")).getText();
+      ContactData contact = new ContactData(id, firstName, lastName, address);
+      contacts.add(contact);
+    }
+    return contacts;
   }
 }

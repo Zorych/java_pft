@@ -1,6 +1,9 @@
 package ru.stqa.pft.addressbook.model;
 
+import java.util.Objects;
+
 public class ContactData {
+  private int id;
   private String firstName;
   private String middleName;
   private String lastName;
@@ -28,11 +31,19 @@ public class ContactData {
   private String secNotes;
 
   public ContactData(String firstName, String middleName, String lastName,  String address, String group) {
+    this.id = Integer.MAX_VALUE;;
     this.firstName = firstName;
     this.middleName = middleName;
     this.lastName = lastName;
     this.address = address;
     this.group = group;
+  }
+
+  public ContactData(int id, String firstName, String lastName, String address) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.address = address;
   }
 
   public void setNickName(String nickName) {
@@ -83,6 +94,50 @@ public class ContactData {
     this.bMonth = bMonth;
     this.bDay = bDay;
     this.bYear = bYear;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public void setMiddleName(String middleName) {
+    this.middleName = middleName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  public void setbMonth(String bMonth) {
+    this.bMonth = bMonth;
+  }
+
+  public void setbDay(String bDay) {
+    this.bDay = bDay;
+  }
+
+  public void setbYear(String bYear) {
+    this.bYear = bYear;
+  }
+
+  public void setaMonth(String aMonth) {
+    this.aMonth = aMonth;
+  }
+
+  public void setaDay(String aDay) {
+    this.aDay = aDay;
+  }
+
+  public void setaYear(String aYear) {
+    this.aYear = aYear;
   }
 
   public void setAnniversary(String aDay, String aMonth, String aYear) {
@@ -205,5 +260,46 @@ public class ContactData {
 
   public void setGroup(String group) {
     this.group = group;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public String getaMonth() {
+    return aMonth;
+  }
+
+  public String getaDay() {
+    return aDay;
+  }
+
+  public String getaYear() {
+    return aYear;
+  }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+                   "id=" + id +
+                   ", firstName='" + firstName + '\'' +
+                   ", lastName='" + lastName + '\'' +
+                   ", address='" + address + '\'' +
+                   '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactData that = (ContactData) o;
+    return Objects.equals(firstName, that.firstName) &&
+                   Objects.equals(lastName, that.lastName) &&
+                   Objects.equals(address, that.address);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(firstName, lastName, address);
   }
 }

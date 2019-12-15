@@ -1,13 +1,18 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
+
+import java.util.Comparator;
+import java.util.List;
 
 public class ContactCreationTests extends TestBase {
 
   @Test
   public void testContactCreation() throws Exception {
-    ContactData newContact = new ContactData("Игорь", "Сергеевич", "Григорьев", "test_address",null);
+    ContactData newContact = new ContactData("Игорь", "Сергеевич", "Григорьев", "test_address", null);
     newContact.setNickName("Zorych");
     newContact.setTitle("test_title");
     newContact.setCompany("test_company");
@@ -24,6 +29,24 @@ public class ContactCreationTests extends TestBase {
     newContact.setSecAddress("test_secondary-address");
     newContact.setSecPhone("555555");
     newContact.setSecNotes("test_secondary-notes");
+    app.getNavigationHelper().goToHomePage();
+    List<ContactData> before = app.getContactHelper().getContactList();
     app.getContactHelper().createContact(true, newContact);
+    List<ContactData> after = app.getContactHelper().getContactList();
+    Assert.assertEquals(before.size() + 1, after.size());
+
+    Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
+    before.add(newContact);
+    before.sort(byId);
+    after.sort(byId);
+
+//    for (ContactData con : before) {
+//      System.out.println("before " + con);
+//    }
+//    for (ContactData con2 : after) {
+//      System.out.println("after " + con2);
+//    }
+
+    Assert.assertEquals(before, after);
   }
 }

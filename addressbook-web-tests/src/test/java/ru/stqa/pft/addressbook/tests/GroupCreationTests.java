@@ -2,6 +2,7 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.Comparator;
@@ -30,10 +31,18 @@ public class GroupCreationTests extends TestBase {
     // проверяем, что после создания кол-во групп стало +1
     Assert.assertEquals(after.size(), before.size() + 1);
 
-    before.add(group);
     Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+    before.add(group);
     before.sort(byId);
     after.sort(byId);
+
+//    for (GroupData con : before) {
+//      System.out.println("before " + con);
+//    }
+//    for (GroupData con2 : after) {
+//      System.out.println("after " + con2);
+//    }
+
     Assert.assertEquals(before, after);
   }
 }
