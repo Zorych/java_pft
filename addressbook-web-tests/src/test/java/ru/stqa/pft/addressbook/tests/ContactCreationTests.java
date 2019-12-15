@@ -38,14 +38,6 @@ public class ContactCreationTests extends TestBase {
     before.add(newContact);
     before.sort(byId);
     after.sort(byId);
-
-//    for (ContactData con : before) {
-//      System.out.println("before " + con);
-//    }
-//    for (ContactData con2 : after) {
-//      System.out.println("after " + con2);
-//    }
-
     Assert.assertEquals(before, after);
   }
 }

@@ -73,8 +73,8 @@ public class ContactHelper extends BaseHelper {
   }
 
   public void initContactModification(int id) {
-    //click(By.xpath("//img[@alt='Edit']"));
-    click(By.xpath("//a[@href='edit.php?id=" + id + "']"));
+    click(By.cssSelector("a[href='edit.php?id=" + id + "']"));
+    //click(By.xpath("//a[@href='edit.php?id=" + id + "']"));
   }
 
   public void submitContactModification() {
