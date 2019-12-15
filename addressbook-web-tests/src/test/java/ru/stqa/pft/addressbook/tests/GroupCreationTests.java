@@ -2,47 +2,26 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class GroupCreationTests extends TestBase {
 
   @Test
   public void testGroupCreation() throws Exception {
-    // открываем страницу со списком групп
-    app.getNavigationHelper().goToGroupPage();
-
-    // сохраняем список имеющихся групп (до создания новой группы)
-    List<GroupData> before = app.getGroupHelper().getGroupList();
-
-    // создаём объект типа GroupData и указываем данные для новой группы
-    GroupData group = new GroupData("test1", "test2", "test3");
-
-    // вызываем метод создания группы
-    app.getGroupHelper().createGroup(group);
-
-    // сохраняем список групп после создания новой группы
-    List<GroupData> after = app.getGroupHelper().getGroupList();
-
-    // проверяем, что после создания кол-во групп стало +1
+    app.goTo().groupPage();
+    List<GroupData> before = app.group().list();
+    GroupData group = new GroupData().withName("test2");
+    app.group().create(group);
+    List<GroupData> after = app.group().list();
     Assert.assertEquals(after.size(), before.size() + 1);
 
-    Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
     before.add(group);
+    Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
     before.sort(byId);
     after.sort(byId);
-
-//    for (GroupData con : before) {
-//      System.out.println("before " + con);
-//    }
-//    for (GroupData con2 : after) {
-//      System.out.println("after " + con2);
-//    }
-
     Assert.assertEquals(before, after);
   }
 }
