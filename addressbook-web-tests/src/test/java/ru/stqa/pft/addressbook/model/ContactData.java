@@ -284,6 +284,7 @@ public class ContactData {
                    "id=" + id +
                    ", firstName='" + firstName + '\'' +
                    ", lastName='" + lastName + '\'' +
+                   ", address='" + address + '\'' +
                    '}';
   }
 
@@ -293,11 +294,12 @@ public class ContactData {
     if (o == null || getClass() != o.getClass()) return false;
     ContactData that = (ContactData) o;
     return Objects.equals(firstName, that.firstName) &&
-                   Objects.equals(lastName, that.lastName);
+                   Objects.equals(lastName, that.lastName) &&
+                   Objects.equals(address, that.address);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstName, lastName);
+    return Objects.hash(firstName, lastName, address);
   }
 }
