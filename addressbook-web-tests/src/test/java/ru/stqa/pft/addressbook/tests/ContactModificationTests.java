@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ContactModificationTests extends TestBase {
 
-  @Test(enabled = false)
+  @Test
   public void testContactModification() {
     if (app.getContactHelper().isThereAContact()) {
       ContactData newContact = new ContactData("test_name", "test_middlename", "test_lastname", "test_address",null);

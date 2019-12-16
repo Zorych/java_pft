@@ -281,10 +281,8 @@ public class ContactData {
   @Override
   public String toString() {
     return "ContactData{" +
-                   "id=" + id +
-                   ", firstName='" + firstName + '\'' +
+                   "firstName='" + firstName + '\'' +
                    ", lastName='" + lastName + '\'' +
-                   ", address='" + address + '\'' +
                    '}';
   }
 
@@ -294,12 +292,11 @@ public class ContactData {
     if (o == null || getClass() != o.getClass()) return false;
     ContactData that = (ContactData) o;
     return Objects.equals(firstName, that.firstName) &&
-                   Objects.equals(lastName, that.lastName) &&
-                   Objects.equals(address, that.address);
+                   Objects.equals(lastName, that.lastName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstName, lastName, address);
+    return Objects.hash(firstName, lastName);
   }
 }
