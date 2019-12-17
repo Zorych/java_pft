@@ -30,132 +30,151 @@ public class ContactData {
   private String secPhone;
   private String secNotes;
 
-  public ContactData(String firstName, String middleName, String lastName,  String address, String group) {
-    this.id = Integer.MAX_VALUE;;
-    this.firstName = firstName;
-    this.middleName = middleName;
-    this.lastName = lastName;
-    this.address = address;
-    this.group = group;
-  }
-
-  public ContactData(int id, String firstName, String lastName, String address) {
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.address = address;
-  }
-
-  public void setNickName(String nickName) {
+  public ContactData withNickName(String nickName) {
     this.nickName = nickName;
+    return this;
   }
 
-  public void setTitle(String title) {
+  public ContactData withTitle(String title) {
     this.title = title;
+    return this;
   }
 
-  public void setCompany(String company) {
+  public ContactData withCompany(String company) {
     this.company = company;
+    return this;
   }
 
-  public void setHomePhone(String homePhone) {
+  public ContactData withHomePhone(String homePhone) {
     this.homePhone = homePhone;
+    return this;
   }
 
-  public void setMobilePhone(String mobilePhone) {
+  public ContactData withMobilePhone(String mobilePhone) {
     this.mobilePhone = mobilePhone;
+    return this;
   }
 
-  public void setWorkPhone(String workPhone) {
+  public ContactData withWorkPhone(String workPhone) {
     this.workPhone = workPhone;
+    return this;
   }
 
-  public void setFaxPhone(String faxPhone) {
+  public ContactData withFaxPhone(String faxPhone) {
     this.faxPhone = faxPhone;
+    return this;
   }
 
-  public void setEmail(String email) {
+  public ContactData withEmail(String email) {
     this.email = email;
+    return this;
   }
 
-  public void setEmail2(String email2) {
+  public ContactData withEmail2(String email2) {
     this.email2 = email2;
+    return this;
   }
 
-  public void setEmail3(String email3) {
+  public ContactData withEmail3(String email3) {
     this.email3 = email3;
+    return this;
   }
 
-  public void setHomepage(String homepage) {
+  public ContactData withHomepage(String homepage) {
     this.homepage = homepage;
+    return this;
   }
 
-  public void setBirthday(String bDay, String bMonth, String bYear) {
+  public ContactData withBirthday(String bDay, String bMonth, String bYear) {
     this.bMonth = bMonth;
     this.bDay = bDay;
     this.bYear = bYear;
+    return this;
   }
 
-  public void setId(int id) {
+  public ContactData withAnniversary(String aDay, String aMonth, String aYear) {
+    this.aMonth = aMonth;
+    this.aDay = aDay;
+    this.aYear = aYear;
+    return this;
+  }
+
+  public ContactData withId(int id) {
     this.id = id;
+    return this;
   }
 
-  public void setFirstName(String firstName) {
+  public ContactData withFirstName(String firstName) {
     this.firstName = firstName;
+    return this;
   }
 
-  public void setMiddleName(String middleName) {
+  public ContactData withMiddleName(String middleName) {
     this.middleName = middleName;
+    return this;
   }
 
-  public void setLastName(String lastName) {
+  public ContactData withLastName(String lastName) {
     this.lastName = lastName;
+    return this;
   }
 
-  public void setAddress(String address) {
+  public ContactData withAddress(String address) {
     this.address = address;
+    return this;
   }
 
-  public void setbMonth(String bMonth) {
+  public ContactData withbMonth(String bMonth) {
     this.bMonth = bMonth;
+    return this;
   }
 
-  public void setbDay(String bDay) {
+  public ContactData withbDay(String bDay) {
     this.bDay = bDay;
+    return this;
   }
 
-  public void setbYear(String bYear) {
+  public ContactData withbYear(String bYear) {
     this.bYear = bYear;
+    return this;
   }
 
-  public void setaMonth(String aMonth) {
+  public ContactData withaMonth(String aMonth) {
     this.aMonth = aMonth;
+    return this;
   }
 
-  public void setaDay(String aDay) {
+  public ContactData withaDay(String aDay) {
     this.aDay = aDay;
+    return this;
   }
 
-  public void setaYear(String aYear) {
+  public ContactData withaYear(String aYear) {
     this.aYear = aYear;
+    return this;
+  }
+  public ContactData withGroup(String group) {
+    this.group = group;
+    return this;
   }
 
-  public void setAnniversary(String aDay, String aMonth, String aYear) {
-    this.aMonth = aMonth;
-    this.aDay = aDay;
-    this.aYear = aYear;
-  }
-
-  public void setSecAddress(String secAddress) {
+  public ContactData withSecAddress(String secAddress) {
     this.secAddress = secAddress;
+    return this;
   }
 
-  public void setSecPhone(String secPhone) {
+  public ContactData withSecPhone(String secPhone) {
     this.secPhone = secPhone;
+    return this;
   }
 
-  public void setSecNotes(String secNotes) {
+  public ContactData withSecNotes(String secNotes) {
     this.secNotes = secNotes;
+    return this;
+  }
+
+  public int getId() {
+    return id;
   }
 
   public String getFirstName() {
@@ -258,30 +277,11 @@ public class ContactData {
     return group;
   }
 
-  public void setGroup(String group) {
-    this.group = group;
-  }
-
-  public int getId() {
-    return id;
-  }
-
-  public String getaMonth() {
-    return aMonth;
-  }
-
-  public String getaDay() {
-    return aDay;
-  }
-
-  public String getaYear() {
-    return aYear;
-  }
-
   @Override
   public String toString() {
     return "ContactData{" +
-                   "firstName='" + firstName + '\'' +
+                   "id='" + id + '\'' +
+                   ", firstName='" + firstName + '\'' +
                    ", lastName='" + lastName + '\'' +
                    '}';
   }
@@ -291,12 +291,13 @@ public class ContactData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ContactData that = (ContactData) o;
-    return Objects.equals(firstName, that.firstName) &&
+    return id == that.id &&
+                   Objects.equals(firstName, that.firstName) &&
                    Objects.equals(lastName, that.lastName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstName, lastName);
+    return Objects.hash(id, firstName, lastName);
   }
 }

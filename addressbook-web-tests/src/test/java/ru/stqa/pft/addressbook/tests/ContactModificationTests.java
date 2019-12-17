@@ -1,35 +1,41 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
-import ru.stqa.pft.addressbook.model.GroupData;
-
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class ContactModificationTests extends TestBase {
 
+  @BeforeMethod
+  public void ensurePreconditions() {
+    if (app.contact().all().size() == 0) {
+      ContactData newContact = new ContactData()
+                                       .withFirstName("Игорь")
+                                       .withMiddleName("Сергеевич")
+                                       .withLastName("Григорьев")
+                                       .withAddress("test_address");
+      app.contact().create(true, newContact);
+    }
+  }
+
   @Test
   public void testContactModification() {
-    if (app.getContactHelper().isThereAContact()) {
-      ContactData newContact = new ContactData("test_name", "test_middlename", "test_lastname", "test_address",null);
-      app.getContactHelper().createContact(true, newContact);
-    }
-    List<ContactData> before = app.getContactHelper().getContactList();
-    ContactData modContact = new ContactData(before.get(before.size() - 1).getId(), "name_mod", "lastname_mod", "address_mod");
-    app.getContactHelper().initContactModification(before.get(before.size() - 1).getId());
-    app.getContactHelper().fillContactForm(false, modContact);
-    app.getContactHelper().submitContactModification();
-    app.getContactHelper().returnToHomePage();
-    List<ContactData> after = app.getContactHelper().getContactList();
+    Set<ContactData> before = app.contact().all();
+    ContactData modifiedContact = before.iterator().next();
+    ContactData contact = new ContactData()
+                                     .withId(modifiedContact.getId())
+                                     .withFirstName("Игорь_mod")
+                                     .withMiddleName("Сергеевич_mod")
+                                     .withLastName("Григорьев_mod")
+                                     .withAddress("test_address_mod");
+    app.contact().modify(contact);
+    Set<ContactData> after = app.contact().all();
     Assert.assertEquals(after.size(), before.size());
 
-    before.remove(before.size() - 1);
-    before.add(modContact);
-    Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-    before.sort(byId);
-    after.sort(byId);
+    before.remove(modifiedContact);
+    before.add(contact);
     Assert.assertEquals(before, after);
   }
 }
