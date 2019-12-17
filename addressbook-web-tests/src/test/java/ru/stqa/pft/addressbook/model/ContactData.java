@@ -16,6 +16,7 @@ public class ContactData {
   private String mobilePhone;
   private String workPhone;
   private String faxPhone;
+  private String home2Phone;
   private String email;
   private String email2;
   private String email3;
@@ -29,6 +30,45 @@ public class ContactData {
   private String secAddress;
   private String secPhone;
   private String secNotes;
+  private String allPhones;
+  private String allMails;
+  private String allRefMails;
+
+  public String getAllPhones() {
+    return allPhones;
+  }
+
+  public String getAllMails() {
+    return allMails;
+  }
+
+  public String getAllRefMails() {
+    return allRefMails;
+  }
+
+  public String getHome2Phone() {
+    return home2Phone;
+  }
+
+  public ContactData withHome2Phone(String home2Phone) {
+    this.home2Phone = home2Phone;
+    return this;
+  }
+
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
+  public ContactData withAllMails(String allMails) {
+    this.allMails = allMails;
+    return this;
+  }
+
+  public ContactData withAllRefMails(String allRefMails) {
+    this.allRefMails = allRefMails;
+    return this;
+  }
 
   public ContactData withNickName(String nickName) {
     this.nickName = nickName;
