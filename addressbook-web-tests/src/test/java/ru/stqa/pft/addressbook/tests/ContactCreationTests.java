@@ -12,25 +12,24 @@ public class ContactCreationTests extends TestBase {
   @Test
   public void testContactCreation() throws Exception {
     ContactData contact = new ContactData()
-                                     .withFirstName("Игорь")
-                                     .withMiddleName("Сергеевич")
-                                     .withLastName("Григорьев")
-                                     .withAddress("test_address")
-                                     .withNickName("Zorych")
-                                     .withTitle("test_title")
-                                     .withCompany("test_company")
-                                     .withHomePhone("111111")
-                                     .withMobilePhone("222222")
-                                     .withWorkPhone("333333")
-                                     .withEmail("test_e-mail")
-                                     .withEmail2("test_e-mail2")
-                                     .withEmail3("test_e-mail3")
-                                     .withHomepage("https://www.linkedin.com/in/igor-grigorev-3a657a18b/")
-                                     .withBirthday("11", "May", "1991")
-                                     .withAnniversary("15", "April", "1992")
-                                     .withSecAddress("test_secondary-address")
-                                     .withSecPhone("555555")
-                                     .withSecNotes("test_secondary-notes");
+                                  .withFirstName("Игорь")
+                                  .withMiddleName("Сергеевич")
+                                  .withLastName("Григорьев")
+                                  .withAddress("ул. Каретный ряд 10/2, 2 этаж")
+                                  .withNickName("Zorych")
+                                  .withTitle("test_title")
+                                  .withCompany("test_company")
+                                  .withHomePhone("+7 (111)11-11")
+                                  .withMobilePhone("2-2 2-2 22")
+                                  .withWorkPhone("333333")
+                                  .withEmail("kaze250t@gmail.com")
+                                  .withEmail3("zorych250t@yandex.ru")
+                                  .withHomepage("https://www.linkedin.com/in/igor-grigorev-3a657a18b/")
+                                  .withBirthday("11", "May", "1991")
+                                  .withAnniversary("15", "April", "1992")
+                                  .withSecAddress("test_secondary-address")
+                                  .withSecPhone("555555")
+                                  .withSecNotes("test_secondary-notes");
     app.goTo().homePage();
     Contacts before = app.contact().all();
     app.contact().create(true, contact);
