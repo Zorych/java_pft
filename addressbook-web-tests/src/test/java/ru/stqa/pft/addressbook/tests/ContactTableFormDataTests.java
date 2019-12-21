@@ -22,6 +22,7 @@ public class ContactTableFormDataTests extends TestBase {
                                     .withMiddleName("Сергеевич")
                                     .withLastName("Григорьев")
                                     .withAddress("ул. Каретный ряд 10/2, 2 этаж")
+                                    .withPhoto("src/test/resources/ava.jpg")
                                     .withNickName("Zorych")
                                     .withTitle("test_title")
                                     .withCompany("test_company")

@@ -17,7 +17,7 @@ public class ContactHelper extends BaseHelper {
   }
 
   public void pushSaveContactButton() {
-    click(By.xpath("(//input[@name='submit'])[2]"));
+    click(By.name("submit"));
   }
 
   public void fillContactForm(boolean isCreation, ContactData contactData) {
