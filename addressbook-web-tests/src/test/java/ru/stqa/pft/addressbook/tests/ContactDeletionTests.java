@@ -17,7 +17,8 @@ public class ContactDeletionTests extends TestBase {
                                        .withFirstName("Игорь")
                                        .withMiddleName("Сергеевич")
                                        .withLastName("Григорьев")
-                                       .withAddress("test_address");
+                                       .withAddress("test_address")
+                                       .withPhoto("src/test/resources/ava.jpg");
       app.contact().create(true, newContact);
     }
   }
