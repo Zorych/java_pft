@@ -3,6 +3,8 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
@@ -103,6 +105,8 @@ public class ContactHelper extends BaseHelper {
     selectContactById(contact.getId());
     deleteSelected();
     contactCache = null;
+    WebDriverWait wait = new WebDriverWait(wd,5);
+    wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.msgbox")));
   }
 
   public ContactData infoFromEditForm(ContactData contact) {
