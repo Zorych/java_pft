@@ -1,69 +1,154 @@
 package ru.stqa.pft.addressbook.model;
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
+
+  @Id
+  @Column(name = "Id")
   private int id = Integer.MAX_VALUE;
+
   @Expose
+  @Column(name = "firstname")
   private String firstName;
+
   @Expose
+  @Column(name = "middlename")
   private String middleName;
+
   @Expose
+  @Column(name = "lastname")
   private String lastName;
+
   @Expose
+  @Transient
   private String group;
+
   @Expose
+  @Column(name = "nickname")
   private String nickName;
+
   @Expose
+  @Column(name = "title")
   private String title;
+
   @Expose
+  @Column(name = "company")
   private String company;
+
   @Expose
+  @Column(name = "address")
+  @Type(type = "text")
   private String address;
+
   @Expose
+  @Column(name = "home")
+  @Type(type = "text")
   private String homePhone;
+
   @Expose
+  @Column(name = "mobile")
+  @Type(type = "text")
   private String mobilePhone;
+
   @Expose
+  @Column(name = "work")
+  @Type(type = "text")
   private String workPhone;
+
   @Expose
+  @Column(name = "fax")
+  @Type(type = "text")
   private String faxPhone;
+
   @Expose
+  @Transient
   private String home2Phone;
+
   @Expose
+  @Column(name = "email")
+  @Type(type = "text")
   private String email;
+
   @Expose
+  @Column(name = "email2")
+  @Type(type = "text")
   private String email2;
+
   @Expose
+  @Column(name = "email3")
+  @Type(type = "text")
   private String email3;
+
   @Expose
+  @Column(name = "homepage")
+  @Type(type = "text")
   private String homepage;
+
   @Expose
+  @Column(name = "bmonth")
   private String bMonth;
+
   @Expose
+//  @Column(name = "bday")
+//  @Type(type = "tinyint")
+  @Transient
   private String bDay;
+
   @Expose
+  @Column(name = "byear")
   private String bYear;
+
   @Expose
+  @Column(name = "amonth")
   private String aMonth;
+
   @Expose
+//  @Column(name = "aday")
+//  @Type(type = "tinyint")
+  @Transient
   private String aDay;
+
   @Expose
+  @Column(name = "ayear")
   private String aYear;
+
   @Expose
+  @Column(name = "address2")
+  @Type(type = "text")
   private String secAddress;
+
   @Expose
+  @Column(name = "phone2")
+  @Type(type = "text")
   private String secPhone;
+
   @Expose
-  private String secNotes;
+  @Column(name = "notes")
+  @Type(type = "text")
+  private String notes;
+
   @Expose
+  @Transient
   private String allPhones;
+
   @Expose
+  @Transient
   private String allMails;
+
   @Expose
+  @Transient
   private String allRefMails;
+
   @Expose
+  @Column(name = "photo")
+  @Type(type = "text")
   private String photo;
 
   public String getPhoto() {
@@ -250,7 +335,7 @@ public class ContactData {
   }
 
   public ContactData withSecNotes(String secNotes) {
-    this.secNotes = secNotes;
+    this.notes = secNotes;
     return this;
   }
 
@@ -350,8 +435,8 @@ public class ContactData {
     return secPhone;
   }
 
-  public String getSecNotes() {
-    return secNotes;
+  public String getNotes() {
+    return notes;
   }
 
   public String getGroup() {

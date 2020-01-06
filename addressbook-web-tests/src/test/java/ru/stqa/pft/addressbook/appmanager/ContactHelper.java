@@ -54,7 +54,7 @@ public class ContactHelper extends BaseHelper {
     type(By.name("ayear"), contactData.getAYear());
     type(By.name("address2"), contactData.getSecAddress());
     type(By.name("phone2"), contactData.getSecPhone());
-    type(By.name("notes"), contactData.getSecNotes());
+    type(By.name("notes"), contactData.getNotes());
   }
 
   public void deleteAll() {
