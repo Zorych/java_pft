@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.ColumnTransformer;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -96,9 +97,9 @@ public class ContactData {
   private String bMonth;
 
   @Expose
-//  @Column(name = "bday")
-//  @Type(type = "tinyint")
-  @Transient
+  @Column(name = "bday", columnDefinition = "TINYINT")
+  //@Type(type = "TINYINT(2)")
+  //@Transient
   private String bDay;
 
   @Expose
@@ -107,12 +108,13 @@ public class ContactData {
 
   @Expose
   @Column(name = "amonth")
+  @ColumnTransformer(read = "CONCAT(UPPER(SUBSTRING(amonth,1,1)),LOWER(SUBSTRING(amonth,2)))")
   private String aMonth;
 
   @Expose
-//  @Column(name = "aday")
-//  @Type(type = "tinyint")
-  @Transient
+  @Column(name = "aday", columnDefinition = "TINYINT")
+  //@Type(type = "TINYINT(2)")
+  //@Transient
   private String aDay;
 
   @Expose
@@ -149,6 +151,7 @@ public class ContactData {
   @Expose
   @Column(name = "photo")
   @Type(type = "text")
+  @Transient
   private String photo;
 
   public String getPhoto() {
@@ -444,26 +447,75 @@ public class ContactData {
   }
 
   @Override
-  public String toString() {
-    return "ContactData{" +
-                   "id='" + id + '\'' +
-                   ", firstName='" + firstName + '\'' +
-                   ", lastName='" + lastName + '\'' +
-                   '}';
-  }
-
-  @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ContactData that = (ContactData) o;
     return id == that.id &&
                    Objects.equals(firstName, that.firstName) &&
-                   Objects.equals(lastName, that.lastName);
+                   Objects.equals(middleName, that.middleName) &&
+                   Objects.equals(lastName, that.lastName) &&
+                   Objects.equals(group, that.group) &&
+                   Objects.equals(nickName, that.nickName) &&
+                   Objects.equals(title, that.title) &&
+                   Objects.equals(company, that.company) &&
+                   Objects.equals(address, that.address) &&
+                   Objects.equals(homePhone, that.homePhone) &&
+                   Objects.equals(mobilePhone, that.mobilePhone) &&
+                   Objects.equals(workPhone, that.workPhone) &&
+                   Objects.equals(faxPhone, that.faxPhone) &&
+                   Objects.equals(home2Phone, that.home2Phone) &&
+                   Objects.equals(email, that.email) &&
+                   Objects.equals(email2, that.email2) &&
+                   Objects.equals(email3, that.email3) &&
+                   Objects.equals(homepage, that.homepage) &&
+                   Objects.equals(bMonth, that.bMonth) &&
+                   Objects.equals(bDay, that.bDay) &&
+                   Objects.equals(bYear, that.bYear) &&
+                   Objects.equals(aMonth, that.aMonth) &&
+                   Objects.equals(aDay, that.aDay) &&
+                   Objects.equals(aYear, that.aYear) &&
+                   Objects.equals(secAddress, that.secAddress) &&
+                   Objects.equals(secPhone, that.secPhone) &&
+                   Objects.equals(notes, that.notes);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, lastName);
+    return Objects.hash(id, firstName, middleName, lastName, group, nickName, title, company, address, homePhone, mobilePhone, workPhone, faxPhone, home2Phone, email, email2, email3, homepage, bMonth, bDay, bYear, aMonth, aDay, aYear, secAddress, secPhone, notes);
   }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+                   "id=" + id +
+                   ", firstName='" + firstName + '\'' +
+                   ", middleName='" + middleName + '\'' +
+                   ", lastName='" + lastName + '\'' +
+                   ", group='" + group + '\'' +
+                   ", nickName='" + nickName + '\'' +
+                   ", title='" + title + '\'' +
+                   ", company='" + company + '\'' +
+                   ", address='" + address + '\'' +
+                   ", homePhone='" + homePhone + '\'' +
+                   ", mobilePhone='" + mobilePhone + '\'' +
+                   ", workPhone='" + workPhone + '\'' +
+                   ", faxPhone='" + faxPhone + '\'' +
+                   ", home2Phone='" + home2Phone + '\'' +
+                   ", email='" + email + '\'' +
+                   ", email2='" + email2 + '\'' +
+                   ", email3='" + email3 + '\'' +
+                   ", homepage='" + homepage + '\'' +
+                   ", bMonth='" + bMonth + '\'' +
+                   ", bDay='" + bDay + '\'' +
+                   ", bYear='" + bYear + '\'' +
+                   ", aMonth='" + aMonth + '\'' +
+                   ", aDay='" + aDay + '\'' +
+                   ", aYear='" + aYear + '\'' +
+                   ", secAddress='" + secAddress + '\'' +
+                   ", secPhone='" + secPhone + '\'' +
+                   ", notes='" + notes + '\'' +
+                   '}';
+  }
+
 }
