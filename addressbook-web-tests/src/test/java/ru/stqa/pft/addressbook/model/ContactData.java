@@ -5,7 +5,9 @@ import org.hibernate.annotations.ColumnTransformer;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -26,10 +28,6 @@ public class ContactData {
   @Expose
   @Column(name = "lastname")
   private String lastName;
-
-  @Expose
-  @Transient
-  private String group;
 
   @Expose
   @Column(name = "nickname")
@@ -98,8 +96,6 @@ public class ContactData {
 
   @Expose
   @Column(name = "bday", columnDefinition = "TINYINT")
-  //@Type(type = "TINYINT(2)")
-  //@Transient
   private String bDay;
 
   @Expose
@@ -113,8 +109,6 @@ public class ContactData {
 
   @Expose
   @Column(name = "aday", columnDefinition = "TINYINT")
-  //@Type(type = "TINYINT(2)")
-  //@Transient
   private String aDay;
 
   @Expose
@@ -145,17 +139,28 @@ public class ContactData {
   private String allMails;
 
   @Expose
-  @Transient
-  private String allRefMails;
-
-  @Expose
   @Column(name = "photo")
   @Type(type = "text")
   @Transient
   private String photo;
 
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"),
+          inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<>();
+
+  public Groups getGroups() {
+    return new Groups(groups);
+  }
+
   public String getPhoto() {
     return photo;
+  }
+
+  public ContactData inGroup(GroupData group) {
+    groups.add(group);
+    return this;
   }
 
   public ContactData withPhoto(String photo) {
@@ -169,10 +174,6 @@ public class ContactData {
 
   public String getAllMails() {
     return allMails;
-  }
-
-  public String getAllRefMails() {
-    return allRefMails;
   }
 
   public String getHome2Phone() {
@@ -191,11 +192,6 @@ public class ContactData {
 
   public ContactData withAllMails(String allMails) {
     this.allMails = allMails;
-    return this;
-  }
-
-  public ContactData withAllRefMails(String allRefMails) {
-    this.allRefMails = allRefMails;
     return this;
   }
 
@@ -290,40 +286,6 @@ public class ContactData {
 
   public ContactData withAddress(String address) {
     this.address = address;
-    return this;
-  }
-
-  public ContactData withbMonth(String bMonth) {
-    this.bMonth = bMonth;
-    return this;
-  }
-
-  public ContactData withbDay(String bDay) {
-    this.bDay = bDay;
-    return this;
-  }
-
-  public ContactData withbYear(String bYear) {
-    this.bYear = bYear;
-    return this;
-  }
-
-  public ContactData withaMonth(String aMonth) {
-    this.aMonth = aMonth;
-    return this;
-  }
-
-  public ContactData withaDay(String aDay) {
-    this.aDay = aDay;
-    return this;
-  }
-
-  public ContactData withaYear(String aYear) {
-    this.aYear = aYear;
-    return this;
-  }
-  public ContactData withGroup(String group) {
-    this.group = group;
     return this;
   }
 
@@ -442,10 +404,6 @@ public class ContactData {
     return notes;
   }
 
-  public String getGroup() {
-    return group;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -455,7 +413,6 @@ public class ContactData {
                    Objects.equals(firstName, that.firstName) &&
                    Objects.equals(middleName, that.middleName) &&
                    Objects.equals(lastName, that.lastName) &&
-                   Objects.equals(group, that.group) &&
                    Objects.equals(nickName, that.nickName) &&
                    Objects.equals(title, that.title) &&
                    Objects.equals(company, that.company) &&
@@ -482,7 +439,7 @@ public class ContactData {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, middleName, lastName, group, nickName, title, company, address, homePhone, mobilePhone, workPhone, faxPhone, home2Phone, email, email2, email3, homepage, bMonth, bDay, bYear, aMonth, aDay, aYear, secAddress, secPhone, notes);
+    return Objects.hash(id, firstName, middleName, lastName, nickName, title, company, address, homePhone, mobilePhone, workPhone, faxPhone, home2Phone, email, email2, email3, homepage, bMonth, bDay, bYear, aMonth, aDay, aYear, secAddress, secPhone, notes);
   }
 
   @Override
@@ -492,7 +449,6 @@ public class ContactData {
                    ", firstName='" + firstName + '\'' +
                    ", middleName='" + middleName + '\'' +
                    ", lastName='" + lastName + '\'' +
-                   ", group='" + group + '\'' +
                    ", nickName='" + nickName + '\'' +
                    ", title='" + title + '\'' +
                    ", company='" + company + '\'' +
@@ -517,5 +473,4 @@ public class ContactData {
                    ", notes='" + notes + '\'' +
                    '}';
   }
-
 }

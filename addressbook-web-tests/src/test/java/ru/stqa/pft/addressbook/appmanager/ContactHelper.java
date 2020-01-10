@@ -46,7 +46,10 @@ public class ContactHelper extends BaseHelper {
     fillDropList(By.name("amonth"), contactData.getAMonth());
 
     if (isCreation) {
-      fillDropList(By.name("new_group"), contactData.getGroup());
+      if (contactData.getGroups().size() > 0) {
+        Assert.assertEquals(contactData.getGroups().size(), 1);
+        fillDropList(By.name("new_group"), contactData.getGroups().iterator().next().getName());
+      }
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
