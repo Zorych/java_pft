@@ -22,11 +22,10 @@ public class HbConnectionTest {
                                                      .configure() // configures settings from hibernate.cfg.xml
                                                      .build();
     try {
-      sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
-    }
-    catch (Exception e) {
+      sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+    } catch (Exception e) {
       e.printStackTrace();
-      StandardServiceRegistryBuilder.destroy( registry );
+      StandardServiceRegistryBuilder.destroy(registry);
     }
   }
 
@@ -37,7 +36,7 @@ public class HbConnectionTest {
     List<ContactData> result = session.createQuery("from ContactData where deprecated = '0000-00-00'").list();
     session.getTransaction().commit();
     session.close();
-    for (ContactData contact : result ) {
+    for (ContactData contact : result) {
       System.out.println(contact);
       System.out.println(contact.getGroups());
     }
