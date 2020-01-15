@@ -58,7 +58,6 @@ public class ContactToGroupAdditionTests extends TestBase {
       app.contact().addToGroup(contactToAddInGroup, groupToAddTo.getId());
     }
 
-    //проверяем, что список айдишников контактов групп в UI совпадает со списком айдишников в БД
     Set<Integer> groupContactsDbIds = app.db().groups().stream()
                                               .filter(g -> g.getId() == groupToAddTo.getId())
                                               .findFirst().get()
@@ -66,13 +65,19 @@ public class ContactToGroupAdditionTests extends TestBase {
                                               .map(ContactData::getId).collect(Collectors.toSet());
     Set<Integer> groupContactsUIIds = app.contact().all().stream()
                                               .map(ContactData::getId).collect(Collectors.toSet());
+    //проверяем, что список айдишников контактов групп в UI совпадает со списком айдишников в БД
     assertThat(groupContactsUIIds, equalTo(groupContactsDbIds));
 
-    //проверяем, что список групп контакта увеличился на 1 и сравниваем группы
+
     Groups contactGroupsAfter = app.db().contacts().stream()
                                         .filter(c -> c.getId() == contactToAddInGroup.getId())
                                         .findFirst().get()
                                         .getGroups();
+    // проверяем что:
+    // 1. кол-во контактов в интерфейсе совпадает со значением счётчика "Number of results" страницы списка контактов группы
+    // 2. кол-во групп после = кол-во групп до + 1
+    // 3. группа записалась верно
+    assertThat(app.contact().all().size(), equalTo(app.contact().countInGroup(groupToAddTo)));
     assertThat(contactGroupsAfter.size(), equalTo(contactGroupsBefore.size() + 1));
     assertThat(contactGroupsAfter, equalTo(contactGroupsBefore.withAdded(groupToAddTo)));
   }

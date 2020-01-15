@@ -10,12 +10,9 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
-import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.File;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ContactHelper extends BaseHelper {
 
@@ -28,7 +25,6 @@ public class ContactHelper extends BaseHelper {
   }
 
   public void pushAddToButton() {
-    click(By.name("add"));
   }
 
   public void fillContactForm(boolean isCreation, ContactData contactData) {
@@ -152,8 +148,24 @@ public class ContactHelper extends BaseHelper {
   public void addToGroup(ContactData contactToAddInGroup, int groupId) {
     selectById(contactToAddInGroup.getId());
     selectGroupById(groupId);
-    pushAddToButton();
+    click(By.name("add"));
     click(By.cssSelector("a[href='./?group=" + groupId + "']"));
+  }
+
+  public void removeFromCurrentGroup(ContactData contact) {
+    selectById(contact.getId());
+    click(By.name("remove"));
+    Assert.assertTrue(wd.findElement(By.cssSelector("div.msgbox")).getText().contains("Users removed."));
+    click(By.cssSelector("a[href*='./?group=']"));
+  }
+
+  public void listInGroup(GroupData group) {
+    if (isElementPresent(By.name("remove"))
+                && wd.getCurrentUrl().contains("addressbook/?group=" + group.getId())) {
+      return;
+    }
+    Select groups = new Select(wd.findElement(By.name("group")));
+    groups.selectByValue(String.valueOf(group.getId()));
   }
 
   public void selectById(int id) {
@@ -163,6 +175,16 @@ public class ContactHelper extends BaseHelper {
   public void selectGroupById(int id) {
     Select groups = new Select(wd.findElement(By.name("to_group")));
     groups.selectByValue(String.valueOf(id));
+  }
+
+  // счётчик в поле Number of results страницы списка контактов группы
+  public Integer countInGroup(GroupData group) {
+    if (isElementPresent(By.name("remove"))
+                && wd.getCurrentUrl().contains("addressbook/?group=" + group.getId())) {
+      return Integer.parseInt(wd.findElement(By.id("search_count")).getText());
+    }
+    wd.get("http://localhost/addressbook/?group=" + group.getId());
+    return Integer.parseInt(wd.findElement(By.id("search_count")).getText());
   }
 
   public boolean isThereAContact() {
