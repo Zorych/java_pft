@@ -20,6 +20,9 @@ public class ApplicationManager {
   private FtpHelper ftp;
   private MailHelper mailHelper;
   private JamesHelper jamesHelper;
+  private NavigationHelper navigationHelper;
+  private UserHelper userHelper;
+  private DbHelper dbHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -29,6 +32,24 @@ public class ApplicationManager {
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+    switch (browser) {
+      case BrowserType.GOOGLECHROME:
+        wd = new ChromeDriver();
+        break;
+      case BrowserType.FIREFOX:
+        wd = new FirefoxDriver();
+        break;
+      case BrowserType.IE:
+        wd = new InternetExplorerDriver();
+        break;
+    }
+  }
+
+  public DbHelper db() {
+    if (dbHelper == null) {
+      dbHelper = new DbHelper();
+    }
+    return dbHelper;
   }
 
   public void stop() {
@@ -43,6 +64,14 @@ public class ApplicationManager {
 
   public String getProperty(String key) {
     return properties.getProperty(key);
+  }
+
+  public NavigationHelper goTo() {
+    return navigationHelper;
+  }
+
+  public UserHelper user() {
+    return userHelper;
   }
 
   public RegistrationHelper registration() {
